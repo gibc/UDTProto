@@ -1,0 +1,32 @@
+﻿<Window x:Class="ExpoTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        Title="MainWindow" Height="350" Width="525">
+
+    <Window.Resources>
+        <ControlTemplate x:Key="validationErrorTemplate">
+            <DockPanel>
+                <TextBlock Foreground="Red" Text="{Binding Path=[0].ErrorContent}" DockPanel.Dock='Bottom'>                   
+                </TextBlock>
+                <AdornedElementPlaceholder 
+                    x:Name="ErrorAdorner">                    
+                </AdornedElementPlaceholder>
+            </DockPanel>
+        </ControlTemplate>
+    </Window.Resources>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding MyICommandThatShouldHandleLoaded}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <StackPanel x:Name="StackPanel" VerticalAlignment="Center">
+            <TextBox Height="40" Width="100" Text="{Binding exObj.NewProp}"></TextBox>
+            <Button Height="40" Width="100" Content="Set Text" Click="ButtonClick"></Button>
+            <DataGrid Width="400" ItemsSource="{Binding dataView}" AutoGenerateColumns="True"/>
+        </StackPanel>
+    </Grid>
+</Window>
